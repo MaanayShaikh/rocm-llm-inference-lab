@@ -1,6 +1,6 @@
 # ROCm LLM Inference Lab
 
-[![CI](https://github.com/Maanay/rocm-llm-inference-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/Maanay/rocm-llm-inference-lab/actions/workflows/ci.yml)
+[![CI](https://github.com/maanayshaikh/rocm-llm-inference-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/maanayshaikh/rocm-llm-inference-lab/actions/workflows/ci.yml)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 
@@ -45,7 +45,7 @@ Embeddings run on CPU so the GPU is dedicated to generation.
 ## Quick start
 
 ```bash
-git clone https://github.com/Maanay/rocm-llm-inference-lab.git && cd rocm-llm-inference-lab
+git clone https://github.com/maanayshaikh/rocm-llm-inference-lab.git && cd rocm-llm-inference-lab
 cp .env.example .env          # check VLLM_IMAGE against the latest tag in the ROCm vLLM docs
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
