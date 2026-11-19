@@ -1,0 +1,6 @@
+aiohttp>=3.9
+openai>=1.40
+sentence-transformers>=3.0
+numpy>=1.26
+gradio>=4.40
+pytest>=8.0
