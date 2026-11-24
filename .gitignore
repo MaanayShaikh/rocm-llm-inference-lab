@@ -5,3 +5,21 @@ __pycache__/
 hf_cache/
 rag/index/
 *.log
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local model and embedding caches
+hf_cache/
+rag/index/
+
+# Python environments and generated files
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local benchmark outputs
+results/
