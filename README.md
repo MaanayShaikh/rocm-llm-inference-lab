@@ -12,7 +12,7 @@ Serve an open LLM with **vLLM on AMD Instinct GPUs (ROCm)** in Docker, **benchma
 
 Teams evaluating AI hardware need to see a model running, with honest numbers, quickly. This repo is a small, reproducible reference for that path: pull the prebuilt ROCm vLLM container, serve a model, measure throughput and latency at increasing load, and build an application on top. Each step is a script you can read in a few minutes.
 
-> **Status:** fill in the Results section below with your own measured numbers before publishing.
+> **Benchmark status:** This repository contains a benchmark harness, but no real-GPU result files are currently committed. The example figures below are explicitly modeled estimates for planning only, not measurements.
 
 ## What this shows
 
@@ -66,24 +66,24 @@ Add your own `.md`/`.txt` files (for example AMD public documentation you have s
 
 ## Results
 
-Fill from `results/bench_*.md` and `results/environment.txt`. Do not publish numbers you did not measure.
+**Illustrative estimate only — not measured.** Planning scenario: one AMD Instinct MI300X-class GPU, Qwen3-8B, vLLM/ROCm, approximately 256 input words and up to 256 output tokens. Actual results depend on software versions, serving configuration, input/output lengths, and GPU setup. Do not cite these ranges as benchmark results.
 
 | Field | Value |
 |---|---|
-| GPU | _(from rocm-smi)_ |
-| ROCm / vLLM / image tag | _(from check_gpu.sh)_ |
+| GPU | Assumed 1× AMD Instinct MI300X-class GPU (estimate only) |
+| ROCm / vLLM / image tag | Not captured; populate from `scripts/check_gpu.sh` after a real run |
 | Model | `Qwen/Qwen3-8B` (default) |
 | Input / output | ~256 words in / 256 tokens out |
 
 | Concurrency | Output tok/s | TTFT p50 (ms) | TTFT p95 (ms) | ITL mean (ms) | E2E p95 (s) |
 |---|---|---|---|---|---|
-| 1 | | | | | |
-| 4 | | | | | |
-| 8 | | | | | |
-| 16 | | | | | |
-| 32 | | | | | |
+| 1 | ~80–180 | ~250–900 | ~400–1,500 | ~15–35 | ~2–8 |
+| 4 | ~250–600 | ~400–1,400 | ~700–2,500 | ~18–45 | ~3–12 |
+| 8 | ~400–900 | ~600–2,000 | ~1,000–3,500 | ~22–60 | ~4–18 |
+| 16 | ~500–1,200 | ~900–3,000 | ~1,500–5,000 | ~30–90 | ~6–28 |
+| 32 | ~550–1,400 | ~1,500–5,000 | ~2,500–8,000 | ~45–140 | ~10–45 |
 
-**Takeaways** _(2-3 sentences: where throughput flattens, how tail latency changes, what you would tune next)_.
+**Expected trend (hypothesis):** Aggregate throughput should rise with concurrency and then flatten near saturation; p95 latency should increase as requests queue. These are assumptions to test, not findings from this repository.
 
 ## Testing without a GPU
 
@@ -93,7 +93,7 @@ python scripts/bench_serving.py --model mock --concurrency 1 4 --rounds 2
 pytest -q
 ```
 
-This verifies the benchmark harness logic only. It says nothing about real GPU performance.
+This verifies the benchmark harness logic only. It does not validate the estimated ranges or establish real GPU performance.
 
 ## Troubleshooting
 
@@ -115,7 +115,7 @@ This verifies the benchmark harness logic only. It says nothing about real GPU p
 scripts/   serve.sh, run_bench.sh, check_gpu.sh, bench_serving.py
 rag/       chunking, embedding + retrieval engine, CLI, Gradio app
 data/docs/ sample documents to index
-results/   your measured benchmark output
+results/   benchmark output (measured runs only)
 tests/     unit tests + mock streaming server
 docs/      video outline, resume mapping
 ```

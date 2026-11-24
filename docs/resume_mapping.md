@@ -1,7 +1,7 @@
-# Resume mapping (only claim what you actually did)
+# Resume mapping (be transparent about test status)
 
-Resume bullet: "Deployed and benchmarked an LLM with vLLM on AMD Instinct (ROCm) in Docker, reaching [X] tokens/sec at [Y] concurrent requests, and built a RAG demo on top"
+The repository currently contains a benchmark harness and a RAG application, but no committed real-GPU benchmark output. Until you run it on AMD Instinct hardware, use a project bullet that describes the implementation rather than claiming measured performance:
 
-- [X] = your measured `output_tok_per_s` at the concurrency you cite (results/bench_*.md)
-- [Y] = the concurrency level for that row
-- Keep `vLLM` and `AMD ROCm` in the Skills line only after this repo is public and results are committed
+> Built a reproducible vLLM + AMD ROCm inference workflow with Docker, a Python concurrency benchmark harness for throughput and latency, and a document-grounded RAG demo; documented an MI300X-class performance estimate as a hypothesis pending hardware validation.
+
+After a real run, replace the estimate with the measured `output_tok_per_s` at the stated concurrency, and commit the generated CSV/Markdown plus `results/environment.txt`. Do not say the project was hardware-benchmarked unless that run actually happened.
